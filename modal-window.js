@@ -167,14 +167,11 @@ function showModal(obj) {
     // save current focus
     focusedElementBeforeModal = jQuery(':focus');
 
-    // get list of all children elements in given object
-    var o = obj.find('*');
-
     // Safari and VoiceOver shim
     // if VoiceOver in Safari is used, set the initial focus to the modal window itself instead of the first keyboard focusable item. This causes VoiceOver to announce the aria-labelled attributes. Otherwise, Safari and VoiceOver will not announce the labels attached to the modal window.
 
-    // set the focus to the first keyboard focusable item
-    o.filter(focusableElementsString).filter(':visible').first().focus();
+    // set the focus to the modal usage instructions.
+    $('#modalUsage').focus();
 
 
 }
