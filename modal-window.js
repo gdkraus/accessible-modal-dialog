@@ -1,27 +1,27 @@
 /*
- 
+
  ============================================
  License for Application
  ============================================
- 
+
  This license is governed by United States copyright law, and with respect to matters
  of tort, contract, and other causes of action it is governed by North Carolina law,
  without regard to North Carolina choice of law provisions.  The forum for any dispute
  resolution shall be in Wake County, North Carolina.
- 
+
  Redistribution and use in source and binary forms, with or without modification, are
  permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice, this list
  of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice, this
  list of conditions and the following disclaimer in the documentation and/or other
  materials provided with the distribution.
- 
+
  3. The name of the author may not be used to endorse or promote products derived from
  this software without specific prior written permission.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
  AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE
@@ -31,7 +31,7 @@
  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
+
  */
 
 // jQuery formatted selector to search for focusable items
@@ -40,7 +40,16 @@ var focusableElementsString = "a[href], area[href], input:not([disabled]), selec
 // store the item that has focus before opening the modal window
 var focusedElementBeforeModal;
 
+// Immutable hash state identifiers
+var closedModalHashStateId = "";
+var openModalHashStateId = "#modal";
+
 $(document).ready(function() {
+    /* Updating the hash state creates a new entry
+    * in the web browser's history. */
+    window.location.hash = closedModalHashStateId;
+    window.onhashchange = function () { if(window.location.hash == "") { hideModal(); } else {showModal();}}
+
     jQuery('#startModal').click(function(e) {
         showModal($('#modal'));
     });
@@ -159,6 +168,7 @@ function enterButtonModal() {
 }
 
 function showModal(obj) {
+    window.location.hash = openModalHashStateId;
     jQuery('#mainPage').attr('aria-hidden', 'true'); // mark the main page as hidden
     jQuery('#modalOverlay').css('display', 'block'); // insert an overlay to prevent clicking and make a visual change to indicate the main apge is not available
     jQuery('#modal').css('display', 'block'); // make the modal window visible
@@ -187,4 +197,7 @@ function hideModal() {
 
     // set focus back to element that had it before the modal was opened
     focusedElementBeforeModal.focus();
+
+    // Return to previous entry in browser history
+    window.history.back();
 }
