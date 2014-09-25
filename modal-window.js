@@ -53,6 +53,9 @@ $(document).ready(function() {
     jQuery('#startModal').click(function(e) {
         showModal($('#modal'));
     });
+    jQuery('#modalOverlay').click(function(e) {
+        hideModal();
+    });
     jQuery('#cancel').click(function(e) {
         hideModal();
     });
