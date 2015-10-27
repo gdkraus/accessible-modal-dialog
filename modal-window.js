@@ -35,7 +35,7 @@
  */
 
 // jQuery formatted selector to search for focusable items
-var focusableElementsString = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]";
+var focusableElementsString = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex]:not([tabindex='-1']), *[contenteditable]";
 
 // store the item that has focus before opening the modal window
 var focusedElementBeforeModal;
