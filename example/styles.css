@@ -1,0 +1,130 @@
+/* -------------------------------------------------------------------------- *\
+ * Necessary styling for the modal to work
+ * -------------------------------------------------------------------------- */
+
+.modal-overlay {
+  z-index: 2;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.66);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal-content {
+  background-color: rgb(255, 255, 255);
+  z-index: 3;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.modal[aria-hidden="true"] {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------- *\
+ * Demo styling
+ * -------------------------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 125% / 1.5 sans-serif;
+  padding: 2em 0;
+}
+
+.main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+.modal-content {
+  padding: 20px;
+  max-width: 90%;
+  width: 700px;
+  border-radius: 2px;
+}
+
+.modal-overlay {
+  background-color: rgba(43, 46, 56, 0.9);
+}
+
+.modal h1 {
+  margin: 0;
+  color: #2980b9;
+  font-size: 1.25em;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1.25em;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.modal-close:hover,
+.modal-close:active {
+  color: #e74c3c;
+}
+
+.screen-reader-offscreen {
+  position: absolute;
+  left: -999px;
+  width: 1px;
+  height: 1px;
+  top: auto;
+}
+
+form p {
+  display: flex;
+}
+
+form p:last-of-type {
+  justify-content: flex-end;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input {
+  flex: 1;
+  margin-left: 1em;
+}
+
+form button {
+  background-color: #81c784;
+  color: white;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 12px 0;
+  min-width: 120px;
+  cursor: pointer;
+  transition: 0.15s;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+form button:hover,
+form button:active {
+  background-color: #66bb6a;
+}
