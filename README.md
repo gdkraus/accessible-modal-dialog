@@ -93,7 +93,12 @@ Here is the basic markup, which can be enhanced. Pay extra attention to the comm
 
 ### Styling layer
 
-You will have to implement some styles for the dialog to “work” (visually speaking). The script itself does not take care of any styling whatsoever, not even the `display` property. It basically mostly toggles the `aria-hidden` attribute on the dialog itself and its counterpart containers. You can use this to show and hide the dialog:
+
+The script itself does not take care of any styling whatsoever, not even the `display` property. It basically mostly toggles the `aria-hidden` attribute on the dialog itself and its counterpart containers.
+
+In browsers supporting the `<dialog>` element, its visibility will be handled by the user-agent itself. Until support gets better across the board, the styling layer is up to the implementor (you).
+
+You can use this to show and hide the dialog:
 
 ```css
 .dialog[aria-hidden='true'] {
