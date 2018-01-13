@@ -94,21 +94,25 @@
     }
 
     this.shown = true;
-    this.dialog.showModal();
-    this.container.removeAttribute('aria-hidden');
 
-    // Iterate over the targets to disable them by setting their `aria-hidden`
-    // attribute to `true`; in case they already have this attribute, keep a
-    // reference of their original value to be able to restore it later
-    this._targets.forEach(function (target) {
-      var original = target.getAttribute('aria-hidden');
+    if (isDialogSupported) {
+      this.dialog.showModal();
+    } else {
+      this.container.removeAttribute('aria-hidden');
 
-      if (original) {
-        target.setAttribute('data-a11y-dialog-original', original);
-      }
+      // Iterate over the targets to disable them by setting their `aria-hidden`
+      // attribute to `true`; in case they already have this attribute, keep a
+      // reference of their original value to be able to restore it later
+      this._targets.forEach(function (target) {
+        var original = target.getAttribute('aria-hidden');
 
-      target.setAttribute('aria-hidden', 'true');
-    });
+        if (original) {
+          target.setAttribute('data-a11y-dialog-original', original);
+        }
+
+        target.setAttribute('aria-hidden', 'true');
+      });
+    }
 
     // Keep a reference to the currently focused element to be able to restore
     // it later, then set the focus to the first focusable child of the dialog
@@ -143,21 +147,25 @@
     }
 
     this.shown = false;
-    this.dialog.close();
-    this.container.setAttribute('aria-hidden', 'true');
 
-    // Iterate over the targets to enable them by remove their `aria-hidden`
-    // attribute or resetting them to their initial value
-    this._targets.forEach(function (target) {
-      var original = target.getAttribute('data-a11y-dialog-original');
+    if (isDialogSupported) {
+      this.dialog.close();
+    } else {
+      this.container.setAttribute('aria-hidden', 'true');
 
-      if (original) {
-        target.setAttribute('aria-hidden', original);
-        target.removeAttribute('data-a11y-dialog-original');
-      } else {
-        target.removeAttribute('aria-hidden');
-      }
-    });
+      // Iterate over the targets to enable them by remove their `aria-hidden`
+      // attribute or resetting them to their initial value
+      this._targets.forEach(function (target) {
+        var original = target.getAttribute('data-a11y-dialog-original');
+
+        if (original) {
+          target.setAttribute('aria-hidden', original);
+          target.removeAttribute('data-a11y-dialog-original');
+        } else {
+          target.removeAttribute('aria-hidden');
+        }
+      });
+    }
 
     // If their was a focused element before the dialog was opened, restore the
     // focus back to it
