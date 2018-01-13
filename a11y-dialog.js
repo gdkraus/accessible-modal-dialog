@@ -23,8 +23,9 @@
     this._maintainFocus = this._maintainFocus.bind(this);
     this._bindKeypress = this._bindKeypress.bind(this);
 
-    // Keep a reference of the node on the instance
+    // Keep a reference of the node and the actual dialog on the instance
     this.container = node;
+    this.dialog = node.querySelector('dialog');
 
     // Keep an object of listener types mapped to callback functions
     this._listeners = {};
@@ -45,6 +46,8 @@
 
     // Make sure the dialog element is disabled on load, and that the `shown`
     // property is synced with its value
+    this.dialog.removeAttribute('open');
+    this.dialog.setAttribute('role', 'dialog');
     this.container.setAttribute('aria-hidden', true);
     this.shown = false;
 
@@ -84,6 +87,7 @@
     }
 
     this.shown = true;
+    this.dialog.showModal();
     this.container.removeAttribute('aria-hidden');
 
     // Iterate over the targets to disable them by setting their `aria-hidden`
@@ -132,6 +136,7 @@
     }
 
     this.shown = false;
+    this.dialog.close();
     this.container.setAttribute('aria-hidden', 'true');
 
     // Iterate over the targets to enable them by remove their `aria-hidden`
