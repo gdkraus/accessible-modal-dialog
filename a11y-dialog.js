@@ -6,6 +6,7 @@
   var FOCUSABLE_ELEMENTS = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
   var TAB_KEY = 9;
   var ESCAPE_KEY = 27;
+  var isDialogSupported = 'show' in document.createElement('dialog');
   var focusedBeforeDialog;
 
   /**
@@ -44,12 +45,18 @@
     // Keep a collection of nodes to disable/enable when toggling the dialog
     this._targets = this._targets || collect(targets) || getSiblings(this.container);
 
-    // Make sure the dialog element is disabled on load, and that the `shown`
-    // property is synced with its value
-    this.dialog.removeAttribute('open');
-    this.dialog.setAttribute('role', 'dialog');
-    this.container.setAttribute('aria-hidden', true);
-    this.shown = false;
+    // Set the `shown` property to match the status from the DOM
+    this.shown = this.dialog.hasAttribute('open');
+
+    if (!isDialogSupported) {
+      this.dialog.setAttribute('role', 'dialog');
+
+      if (this.shown) {
+        this.container.removeAttribute('aria-hidden');
+      } else {
+        this.container.setAttribute('aria-hidden', true);
+      }
+    }
 
     // Keep a collection of dialog openers, each of which will be bound a click
     // event listener to open the dialog
