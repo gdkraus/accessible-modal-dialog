@@ -13,9 +13,9 @@ This page demonstrates how to make a modal window as accessible as possible to a
 This example implements the following features:
 
 1. The page is divided into three sections:
-  1. <div id="mainPage></div>
-  2. <div id="modal" role="dialog"></div>
-  3. <div id="modalOverlay"></div>
+  1. &lt;div id="mainPage&gt;&lt;/div&gt;
+  2. &lt;div id="modal" role="dialog"&gt;&lt;/div&gt;
+  3. &lt;div id="modalOverlay"&gt;&lt;/div&gt;
 
 2. When the modal dialog is displayed, an overlay is placed over top of the mainPage so it is
   1. visually grayed out in order to indicate you cannot interact with what is behind the window
